@@ -12,3 +12,6 @@ gem 'has_secure_token'
 
 # To use Jbuilder templates for JSON
 gem 'jbuilder'
+
+# Role based permissions authentication
+gem 'cancancan'

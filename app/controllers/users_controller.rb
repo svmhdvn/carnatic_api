@@ -1,5 +1,5 @@
-class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+class UsersController < AuthenticatedController
+  before_action :authenticate_user, only: [:show, :update, :destroy]
 
   # GET /users
   def index
@@ -40,10 +40,4 @@ class UsersController < ApplicationController
     @user.destroy
     head :no_content
   end
-
-  private
-
-    def set_user
-      @user = User.find(params[:id])
-    end
 end
