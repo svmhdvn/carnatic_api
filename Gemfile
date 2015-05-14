@@ -15,3 +15,5 @@ gem 'jbuilder'
 
 # Role based permissions authentication
 gem 'cancancan'
+
+gem 'rack-cors'

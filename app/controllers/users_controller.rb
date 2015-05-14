@@ -1,15 +1,15 @@
 class UsersController < AuthenticatedController
-  before_action :authenticate_user, only: [:show, :update, :destroy]
+  before_action :authenticate_user, only: [:update, :destroy]
 
-  # GET /users
-  def index
-    @users = User.all
-    render "users/index"
-  end
+  # POST /users/login
+  def login
+    @user = User.find_by(email: params[:email])
 
-  # GET /users/:id
-  def show
-    render "users/show"
+    if @user && @user.authenticate(params[:password])
+      render "users/show"
+    else
+      render json: { errors: "Invalid username/password" }, status: 401
+    end
   end
 
   # POST /users
