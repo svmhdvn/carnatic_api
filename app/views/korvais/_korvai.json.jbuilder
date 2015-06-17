@@ -1,0 +1,1 @@
+json.extract! korvai, :id, :user_id, :content, :thalam, :matras_after, :created_at

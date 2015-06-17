@@ -14,6 +14,6 @@ gem 'has_secure_token'
 gem 'jbuilder'
 
 # Role based permissions authentication
-gem 'cancancan'
+# gem 'cancancan'
 
 gem 'rack-cors'

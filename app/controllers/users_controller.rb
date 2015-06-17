@@ -14,10 +14,17 @@ class UsersController < AuthenticatedController
 
   # POST /users
   def create
-    valid_params = params.permit(:name, :email, :password, :password_confirmation)
+    require 'digest/md5'
+
+    valid_params = params.permit(:email, :password, :password_confirmation)
     @user = User.new(valid_params)
 
     if @user.save
+      Profile.create(
+        user: @user,
+        name: params[:name], 
+        picture_url: "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(params[:email])}?d=mm"
+      )
       render "users/show"
     else
       render errors_as_json(@user)
@@ -26,7 +33,7 @@ class UsersController < AuthenticatedController
 
   # PATCH/PUT /users/:id
   def update
-    valid_params = params.permit(:name, :email, :password, :password_confirmation)
+    valid_params = params.permit(:email, :password, :password_confirmation)
 
     if @user.update(valid_params)
       head :no_content
